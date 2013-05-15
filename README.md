@@ -1,0 +1,4 @@
+switchable
+==========
+
+kissy gallery switchable
