@@ -1,12 +1,12 @@
 {
     "name": "switchable",
     "version": "1.3",
-    "desc": "请修改组件描述",
+    "desc": "KISSY 1.3 switchable",
     "cover": "",
     "author": {
         "name": "yiminghe",
         "email": "yiminghe@gmail.com",
-        "page": "请修改作者个人首页"
+        "page": "docs.kissyui.com"
     },
     "type": "kissy-pie",
     "type-url": "http://abc.alibaba-inc.com/r/kissy-pie"
