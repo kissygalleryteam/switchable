@@ -2668,7 +2668,9 @@ KISSY.add('gallery/switchable/1.3/tabs/aria',function (S, DOM, Event, Switchable
 
         // move focus to current trigger if invoked by dom event
         if (domEvent) {
+        	try{
             trigger.focus();
+          }catch(e){}
         }
         if (lastPanel) {
             lastPanel.setAttribute("aria-hidden", "true");
@@ -2948,7 +2950,9 @@ KISSY.add('gallery/switchable/1.3/accordion/aria',function (S, DOM, Event, Aria,
             cur.setAttribute("aria-selected", "false");
         });
         if (focusNext) {
+        	try{
             next.focus();
+          }catch(e){}
         }
         setTabIndex(next, "0");
         DOM.addClass(next, "ks-switchable-select");

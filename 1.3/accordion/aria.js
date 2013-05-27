@@ -248,7 +248,9 @@ KISSY.add(function (S, DOM, Event, Aria, Accordion, Switchable) {
             cur.setAttribute("aria-selected", "false");
         });
         if (focusNext) {
+        	try{
             next.focus();
+          }catch(e){}
         }
         setTabIndex(next, "0");
         DOM.addClass(next, "ks-switchable-select");

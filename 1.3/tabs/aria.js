@@ -223,7 +223,9 @@ KISSY.add(function (S, DOM, Event, Switchable, Aria, Tabs) {
 
         // move focus to current trigger if invoked by dom event
         if (domEvent) {
+        	try{
             trigger.focus();
+          }catch(e){}
         }
         if (lastPanel) {
             lastPanel.setAttribute("aria-hidden", "true");
