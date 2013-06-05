@@ -689,7 +689,7 @@ KISSY.add('gallery/switchable/1.3/base',function (S, DOM, Event, undefined) {
                     // 不滚屏，其他元素顶上来即可
                     deletePanel();
                     self.activeIndex = -1;
-                    // notify datalazyload
+                    // notify lazyload
                     self.switchTo(activeIndex, undefined, undefined, function () {
                         callback();
                     });
@@ -1244,6 +1244,9 @@ KISSY.add('gallery/switchable/1.3/lazyload',function (S, DOM, Switchable) {
     var EVENT_BEFORE_SWITCH = 'beforeSwitch',
         IMG_SRC = 'img',
         AREA_DATA = 'textarea',
+        IMG_SRC_DATA = 'data-ks-lazyload',
+        AREA_DATA_CLS = 'ks-datalazyload',
+        CUSTOM = '-custom',
         FLAGS = {};
 
     FLAGS[IMG_SRC] = 'lazyImgAttribute';
@@ -1259,6 +1262,72 @@ KISSY.add('gallery/switchable/1.3/lazyload',function (S, DOM, Switchable) {
     });
 
     /**
+     * 加载图片 src
+     * @static
+     */
+    function loadImgSrc(img, flag) {
+        flag = flag || IMG_SRC_DATA;
+        var dataSrc = img.getAttribute(flag);
+
+        if (dataSrc && img.src != dataSrc) {
+            img.src = dataSrc;
+            img.removeAttribute(flag);
+        }
+    }
+
+    function loadCustomLazyData(containers, type, flag) {
+        var imgs;
+
+        if (type === 'img-src') {
+            type = 'img';
+        }
+
+        // 支持数组
+        if (!S.isArray(containers)) {
+            containers = [DOM.get(containers)];
+        }
+
+        // 遍历处理
+        S.each(containers, function (container) {
+            switch (type) {
+                case 'img':
+                    if (container.nodeName === 'IMG') { // 本身就是图片
+                        imgs = [container];
+                    } else {
+                        imgs = DOM.query('img', container);
+                    }
+
+                    S.each(imgs, function (img) {
+                        loadImgSrc(img, flag || (IMG_SRC_DATA + CUSTOM));
+                    });
+                    break;
+
+                default:
+                    DOM.query('textarea', container).each(function (area) {
+                        if (DOM.hasClass(area, flag || (AREA_DATA_CLS + CUSTOM))) {
+                            loadAreaData(area, true);
+                        }
+                    });
+            }
+        });
+    }
+
+    /**
+     * 从 textarea 中加载数据
+     * @static
+     */
+    function loadAreaData(area, execScript) {
+        // 采用隐藏 textarea 但不去除方式，去除会引发 Chrome 下错乱
+        area.style.display = 'none';
+        area.className = ''; // clear hook
+        var content = DOM.create('<div>');
+        // area 直接是 container 的儿子
+        area.parentNode.insertBefore(content, area);
+        DOM.html(content, area.value, execScript);
+    }
+
+
+    /**
      * 织入初始化函数
      */
     Switchable.addPlugin({
@@ -1266,8 +1335,7 @@ KISSY.add('gallery/switchable/1.3/lazyload',function (S, DOM, Switchable) {
         name: 'lazyload',
 
         init: function (host) {
-            var DataLazyload = S.require("datalazyload"),
-                cfg = host.config,
+            var cfg = host.config,
                 type = cfg.lazyDataType,
                 flag;
 
@@ -1281,7 +1349,7 @@ KISSY.add('gallery/switchable/1.3/lazyload',function (S, DOM, Switchable) {
             cfg.lazyDataType = type;
             flag = cfg[FLAGS[type]];
             // 没有延迟项
-            if (!DataLazyload || !type || !flag) {
+            if (!type || !flag) {
                 return;
             }
 
@@ -1300,8 +1368,7 @@ KISSY.add('gallery/switchable/1.3/lazyload',function (S, DOM, Switchable) {
                 var steps = host._realStep || cfg.steps,
                     from = ev.toIndex * steps ,
                     to = from + steps;
-                DataLazyload.loadCustomLazyData(host.panels.slice(from, to),
-                    type, flag);
+                loadCustomLazyData(host.panels.slice(from, to), type, flag);
                 if (isAllDone()) {
                     host.detach(EVENT_BEFORE_SWITCH, loadLazyData);
                 }

@@ -669,7 +669,7 @@ KISSY.add(function (S, DOM, Event, undefined) {
                     // 不滚屏，其他元素顶上来即可
                     deletePanel();
                     self.activeIndex = -1;
-                    // notify datalazyload
+                    // notify lazyload
                     self.switchTo(activeIndex, undefined, undefined, function () {
                         callback();
                     });
