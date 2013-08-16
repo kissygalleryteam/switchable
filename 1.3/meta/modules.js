@@ -1,3 +1,3 @@
-config({
-    'gallery/switchable/index': {requires: ['node','base']}
+KISSY.config({
+    'gallery/switchable/index': {requires: ['node']}
 });

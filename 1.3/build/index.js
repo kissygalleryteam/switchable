@@ -1030,7 +1030,7 @@ KISSY.add('gallery/switchable/1.3/accordion/base',function (S, DOM, Switchable) 
  * Carousel Widget
  * @author lifesinger@gmail.com, yiminghe@gmail.com
  */
-KISSY.add( function (S, DOM, Event, Switchable) {
+KISSY.add('gallery/switchable/1.3/carousel/base',function (S, DOM, Event, Switchable) {
 
     var CLS_PREFIX = 'ks-switchable-',
         DOT = '.',
@@ -1973,7 +1973,7 @@ KISSY.add('gallery/switchable/1.3/circular',function (S, DOM, Anim, Switchable) 
  * common aria for switchable and stop autoplay if necessary
  * @author yiminghe@gmail.com
  */
-KISSY.add( function(S, DOM, Event, Switchable) {
+KISSY.add('gallery/switchable/1.3/aria',function(S, DOM, Event, Switchable) {
 
 
     Switchable.addPlugin({

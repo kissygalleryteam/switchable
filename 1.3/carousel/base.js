@@ -2,7 +2,7 @@
  * Carousel Widget
  * @author lifesinger@gmail.com, yiminghe@gmail.com
  */
-KISSY.add( function (S, DOM, Event, Switchable) {
+KISSY.add(function (S, DOM, Event, Switchable) {
 
     var CLS_PREFIX = 'ks-switchable-',
         DOT = '.',

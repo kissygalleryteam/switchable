@@ -2,7 +2,7 @@
  * common aria for switchable and stop autoplay if necessary
  * @author yiminghe@gmail.com
  */
-KISSY.add( function(S, DOM, Event, Switchable) {
+KISSY.add(function(S, DOM, Event, Switchable) {
 
 
     Switchable.addPlugin({
