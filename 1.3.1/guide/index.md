@@ -9,12 +9,12 @@
 
 参考 
 
-http://docs.kissyui.com/docs/html/api/component/switchable/switchable.html
+http://docs.kissyui.com/1.3/docs/html/api/component/switchable/switchable.html
 
 引用方式换做：
 
 ``` javascript
-	KISSY.use('gallery/switchable/1.3/',function(S,Switchable){
+	KISSY.use('gallery/switchable/1.3.1/',function(S,Switchable){
 	    // use Switchable
 	});
 ```	
@@ -23,4 +23,4 @@ http://docs.kissyui.com/docs/html/api/component/switchable/switchable.html
 ## demo
 
 
-[demo](http://gallery.kissyui.com/switchable/1.3/demo/index.html)
+[demo](http://gallery.kissyui.com/switchable/1.3.1/demo/index.html)
