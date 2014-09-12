@@ -1,0 +1,17 @@
+ul,li {
+	padding:0;
+	margin:0;
+	list-style-type:none;
+}
+body{padding-left:10px;}
+      
+      .scroll-news {
+            height: 20px;
+            overflow: hidden;
+            margin-top:10px;
+;        }
+
+        .scroll-news a {
+            color: #FF7E00;
+            font-size: 15px
+        }
